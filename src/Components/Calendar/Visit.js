@@ -5,7 +5,7 @@ export function Visit({ visit, setShouldReload }) {
   return (
     <Card
       className={visit.petName === null ? "alert-primary" : "alert-danger"}
-      style={{ width: "12rem", maxHeight: "7rem", marginBottom: 10 }}
+      style={{ width: "13rem", Height: "7rem", marginBottom: 10 }}
     >
       <Card.Body>
         {localStorage.getItem("type") === "vet" ? (
@@ -35,11 +35,25 @@ export function Visit({ visit, setShouldReload }) {
                 "PUT"
               ).then((response) => setShouldReload(Math.random()))
             }
-            style={{ position: "absolute", marginTop: 30, marginLeft: 90 }}
+            style={{ position: "absolute", marginTop: 30, marginLeft: 140 }}
           >
             zapisz
           </Button>
-        ) : null}
+        ) : (
+          <Button
+            onClick={() =>
+              sendRequestWithToken(
+                `owners/${localStorage.getItem("id")}` +
+                  `/pets/${localStorage.getItem("petId")}` +
+                  `/visits/${visit.visitId}/cancel`,
+                "PUT"
+              ).then((response) => setShouldReload(Math.random()))
+            }
+            style={{ position: "absolute", marginTop: 50, marginLeft: 140 }}
+          >
+            anuluj
+          </Button>
+        )}
         <Card.Title>
           {visit.petName} {visit.petSpecies}
         </Card.Title>

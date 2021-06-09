@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { Button, Row } from "react-bootstrap";
 import { Day } from "./Day";
 import { sendRequestWithToken } from "../../utils/Authorization";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export function Calendar() {
   const [activeDate, setActiveDate] = useState(new Date());
   const [visits, setVisits] = useState([]);
   const [shouldReload, setShouldReload] = useState(0);
+  const [pet, setPet] = useState();
   useEffect(() => {
     async function init() {
       let response;
@@ -21,6 +22,28 @@ export function Calendar() {
       }
       let json = await response.json();
       setVisits(json);
+
+      response = await sendRequestWithToken(
+        `owners/${localStorage.getItem("id")}/pets/${localStorage.getItem(
+          "petId"
+        )}`
+      );
+      json = await response.json();
+      setPet(json);
+    }
+
+    init();
+  }, [activeDate, shouldReload]);
+
+  useEffect(() => {
+    async function init() {
+      let response = await sendRequestWithToken(
+        `owners/${localStorage.getItem("id")}/pets/${localStorage.getItem(
+          "petId"
+        )}`
+      );
+      let json = await response.json();
+      setPet(json);
     }
 
     init();
@@ -107,6 +130,15 @@ export function Calendar() {
           justifyContent: "center",
         }}
       >
+        {localStorage.getItem("type") === "owner" ? (
+          <Link style={{ position: "absolute", marginRight: 1530 }} to={"/pet"}>
+            <Button>
+              {pet !== undefined
+                ? "umawiasz wizytę dla: " + pet.name + " " + pet.species
+                : null}
+            </Button>
+          </Link>
+        ) : null}
         <Button
           variant={"dark"}
           onClick={() =>

@@ -15,6 +15,7 @@ export async function sendRequestWithToken(path, method = "GET", body = null) {
     localStorage.removeItem("petId");
     localStorage.removeItem("type");
     localStorage.removeItem("token");
+    window.location = "/login";
   }
   return response;
 }
@@ -33,14 +34,15 @@ export async function login(login, password) {
     localStorage.setItem("token", json.token);
     localStorage.setItem("id", json.userId);
     localStorage.setItem("type", json.type);
+    window.location = "/home";
   }
 }
 
-export async function register(login, password, firstName, surName, vetCode) {
+export async function register(login, password, firstname, surname, vetCode) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ login, password, firstName, surName, vetCode }),
+    body: JSON.stringify({ login, password, firstname, surname, vetCode }),
   };
   let response = await fetch(`${url}register`, requestOptions);
   if (response.ok) {
@@ -48,6 +50,7 @@ export async function register(login, password, firstName, surName, vetCode) {
     localStorage.setItem("token", json.token);
     localStorage.setItem("id", json.userId);
     localStorage.setItem("type", json.type);
+    window.location = "/home";
   }
   return response;
 }

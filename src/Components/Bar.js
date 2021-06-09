@@ -10,12 +10,16 @@ export function Bar() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Link to="/calendar">
-            <Button variant={"dark"}>Kalendarz</Button>
-          </Link>
-          <Link to="/pet">
-            <Button variant={"dark"}>Zwierzęta</Button>
-          </Link>
+          {localStorage.getItem("type") === "vet" ? (
+            <Link to="/calendar">
+              <Button variant={"dark"}>Kalendarz</Button>
+            </Link>
+          ) : null}
+          {localStorage.getItem("type") === "owner" ? (
+            <Link to="/pet">
+              <Button variant={"dark"}>Zwierzęta</Button>
+            </Link>
+          ) : null}
         </Nav>
         <Nav>
           <Link to="/login">
@@ -25,6 +29,7 @@ export function Bar() {
                 localStorage.removeItem("petId");
                 localStorage.removeItem("type");
                 localStorage.removeItem("token");
+                window.location = "/login";
               }}
               variant={"outline-danger"}
             >
