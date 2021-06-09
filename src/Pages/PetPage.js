@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { sendRequestWithToken } from "../utils/Authorization";
 
 export function PetPage() {
-
   const [pets, setPets] = useState([]);
   const [name, setName] = useState("");
   const [species, setSpecies] = useState("");
+  const [shouldReload, setShouldReload] = useState(0);
   const ownerId = localStorage.getItem("id");
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export function PetPage() {
       setPets(json);
     }
     fetchAPI();
-  }, []);
+  }, [shouldReload]);
 
   return (
     <Container style={{ marginTop: 50 }}>
@@ -71,13 +71,10 @@ export function PetPage() {
           type="submit"
           onClick={(e) => {
             e.preventDefault();
-            fetch(
-              `https://petclinicio.herokuapp.com/owners/${ownerId}/pets/add?name=${name}&species=${species}`,
-              {
-                method: "POST",
-              }
-            );
-            window.location.reload();
+            sendRequestWithToken(
+              `owners/${ownerId}/pets/add?name=${name}&species=${species}`,
+              "POST"
+            ).then((response) => setShouldReload(Math.random()));
           }}
         >
           Dodaj
