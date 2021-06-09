@@ -5,17 +5,7 @@ export function PlaceHolderPage({ text }) {
     <Container>
       <Row
         style={{
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-          height: 50,
-          marginTop: 30,
-        }}
-      >
-        <h1>Witaj!</h1>
-      </Row>
-      <Row
-        style={{
+          paddingTop: 30,
           alignItems: "center",
           display: "flex",
           justifyContent: "center",
