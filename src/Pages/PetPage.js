@@ -65,12 +65,12 @@ export function PetPage() {
             }
           >
             {" "}
-            X{" "}
+            Usuń zwierzaka{" "}
           </Button>
         </Col>
 
         <Col>
-          <h1> Dodaj nowego zwierzaka</h1>
+          <h1 style={{marginBottom: 10}}> Dodaj nowego zwierzaka</h1>
           <Form>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Imię zwierzaka</Form.Label>

@@ -135,7 +135,7 @@ export function Calendar() {
             <Button
              style={{ justifyContent: "center", width: 350}}>
               {pet !== undefined
-                ? "umawiasz wizytę dla: " + pet.name + " " + pet.species
+                ? "Umawiasz wizytę dla: " + pet.name + " " + pet.species
                 : null}
             </Button>
           </Link>
