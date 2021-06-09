@@ -2,7 +2,7 @@ import { PlaceHolderPage } from "./PlaceHolderPage";
 import { sendRequestWithToken } from "../utils/Authorization";
 import { Redirect } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 
 export function HomePage() {
   const [user, setUser] = useState("[]");
@@ -33,10 +33,11 @@ export function HomePage() {
       <PlaceHolderPage
         text={"Jesteś w systemie obsługi wizyt w klinice weterynaryjnej!"}
       />
-      <Container style={{ padding: 10 }}>
+      <Container style={{ paddingTop: 60 }}>
         <h2> Twoje dane </h2>
         <h3> Imię: {user.firstname} </h3>
         <h3> Nazwisko: {user.surname} </h3>
+
       </Container>
     </div>
   );
