@@ -6,7 +6,6 @@ import { Button, Container } from "react-bootstrap";
 
 export function HomePage() {
   const [user, setUser] = useState("[]");
-  const ownerId = localStorage.getItem("id");
 
   useEffect(() => {
     async function fetchAPI() {
@@ -34,7 +33,8 @@ export function HomePage() {
       />
       <Container style={{ padding: 10 }}>
         <h2> Twoje dane </h2>
-        <h3> {user.firstName} {user.surname} </h3>
+        <h3> Imię: {user.firstName} </h3>
+        <h3> Nazwisko: {user.surname} </h3>
       </Container>
     </div>
   );
