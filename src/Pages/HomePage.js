@@ -7,8 +7,7 @@ export function HomePage() {
       {localStorage.getItem("token") === null ? (
         <Redirect to={"/login"} />
       ) : null}
-      <PlaceHolderPage text={"strona główna"} />
+      <PlaceHolderPage text={"Jesteś w systemie obsługi wizyt w klinice weterynaryjnej!"} />
     </div>
   );
-  // :)   => :D O.o XD:
 }
