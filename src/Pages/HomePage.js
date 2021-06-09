@@ -15,7 +15,9 @@ export function HomePage() {
           `owners/${localStorage.getItem("id")}`
         );
       } else {
-        response = await sendRequestWithToken(`vets/${localStorage.getItem("id")}`);
+        response = await sendRequestWithToken(
+          `vets/${localStorage.getItem("id")}`
+        );
       }
       let json = await response.json();
       setUser(json);
@@ -33,7 +35,7 @@ export function HomePage() {
       />
       <Container style={{ padding: 10 }}>
         <h2> Twoje dane </h2>
-        <h3> Imię: {user.firstName} </h3>
+        <h3> Imię: {user.firstname} </h3>
         <h3> Nazwisko: {user.surname} </h3>
       </Container>
     </div>
