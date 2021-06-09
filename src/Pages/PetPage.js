@@ -2,6 +2,7 @@ import { Button, Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useEffect, useState } from "react";
 import { sendRequestWithToken } from "../utils/Authorization";
+import { Redirect } from "react-router-dom";
 
 export function PetPage() {
   const [pets, setPets] = useState([]);
@@ -21,6 +22,9 @@ export function PetPage() {
 
   return (
     <Container style={{ marginTop: 50 }}>
+      {localStorage.getItem("token") === null ? (
+        <Redirect to={"/login"} />
+      ) : null}
       <h1> Twoje zwierzaki </h1>
       {pets.map((pet) => (
         <Button
