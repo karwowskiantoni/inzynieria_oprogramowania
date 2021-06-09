@@ -131,8 +131,9 @@ export function Calendar() {
         }}
       >
         {localStorage.getItem("type") === "owner" ? (
-          <Link style={{ position: "absolute", marginRight: 1530 }} to={"/pet"}>
-            <Button>
+          <Link style={{position: "absolute", marginRight: 1530, marginLeft: 500 }} to={"/pet"}>
+            <Button
+             style={{ justifyContent: "center", width: 350}}>
               {pet !== undefined
                 ? "umawiasz wizytę dla: " + pet.name + " " + pet.species
                 : null}
