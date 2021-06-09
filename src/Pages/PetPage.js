@@ -2,7 +2,7 @@ import { Button, Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useEffect, useState } from "react";
 import { sendRequestWithToken } from "../utils/Authorization";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 export function PetPage() {
   const [pets, setPets] = useState([]);
@@ -10,6 +10,7 @@ export function PetPage() {
   const [species, setSpecies] = useState("");
   const [shouldReload, setShouldReload] = useState(0);
   const ownerId = localStorage.getItem("id");
+  
 
   useEffect(() => {
     async function fetchAPI() {
@@ -27,24 +28,27 @@ export function PetPage() {
       ) : null}
       <h1> Twoje zwierzaki </h1>
       {pets.map((pet) => (
-        <Button
-          key={pet.name}
-          style={{
-            background: "none",
-            color: "#266DD3",
-            border: "none",
-            alignItems: "left",
-            display: "flex",
-            justifyContent: "center",
-            height: 50,
-            marginBottom: 10,
-          }}
-        >
-          <h2>
-            {" "}
-            {pet.name} {pet.species}{" "}
-          </h2>
-        </Button>
+        <Link to="/calendar">
+          <Button
+            onClick={()=>localStorage.setItem("petId", pet.petId)}
+            key={pet.petId}
+            style={{
+              background: "none",
+              color: "#266DD3",
+              border: "none",
+              alignItems: "left",
+              display: "flex",
+              justifyContent: "center",
+              height: 50,
+              marginBottom: 10,
+            }}
+          >
+            <h2>
+              {" "}
+              {pet.name} {pet.species}{" "}
+            </h2>
+          </Button>
+        </Link>
       ))}
 
       <h1> Dodaj nowego zwierzaka</h1>
