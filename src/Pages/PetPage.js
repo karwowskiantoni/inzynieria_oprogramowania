@@ -8,6 +8,8 @@ export function PetPage() {
   const [pets, setPets] = useState([]);
   const [name, setName] = useState("");
   const [species, setSpecies] = useState("");
+  const [newName, setNewName] = useState("");
+  const [newSpecies, setNewSpecies] = useState("");
   const [shouldReload, setShouldReload] = useState(0);
   const ownerId = localStorage.getItem("id");
 
@@ -70,7 +72,7 @@ export function PetPage() {
         </Col>
 
         <Col>
-          <h1 style={{marginBottom: 10}}> Dodaj nowego zwierzaka</h1>
+          <h1 style={{ marginBottom: 10 }}> Dodaj nowego zwierzaka</h1>
           <Form>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Imię zwierzaka</Form.Label>
@@ -105,6 +107,46 @@ export function PetPage() {
               }}
             >
               Dodaj
+            </Button>
+          </Form>
+          <h1 > Edytuj dane zwierzaka</h1>
+          <Form>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Imię zwierzaka</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Imię"
+                onChange={(e) => {
+                  setNewName(e.target.value);
+                }}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Gatunek</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Gatunek"
+                onChange={(e) => {
+                  setNewSpecies(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                sendRequestWithToken(
+                  `owners/${ownerId}/pets/${localStorage.getItem(
+                    "petId"
+                  )}/change-data`,
+                  "PUT",
+                  JSON.stringify({ name: newName, species: newSpecies })
+                ).then((response) => setShouldReload(Math.random()));
+              }}
+            >
+              Edytuj
             </Button>
           </Form>
         </Col>
