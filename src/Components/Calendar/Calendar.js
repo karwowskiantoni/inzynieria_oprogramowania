@@ -40,8 +40,9 @@ export function Calendar() {
       let json = await response.json();
       setPet(json);
     }
-
-    init();
+    if (localStorage.getItem("petId") !== null) {
+      init();
+    }
   }, [activeDate, shouldReload]);
 
   function createWeeks(visits) {
@@ -59,12 +60,17 @@ export function Calendar() {
         date={
           new Date(activeDate.getFullYear(), activeDate.getMonth(), number + 1)
         }
-        visits={visits.filter(
-          (visit) =>
-            new Date(visit.beginTime).getDate() === number + 1 &&
-            new Date(visit.beginTime).getMonth() === activeDate.getMonth() &&
-            new Date(visit.beginTime).getFullYear() === activeDate.getFullYear()
-        )}
+        visits={visits
+          .filter(
+            (visit) =>
+              new Date(visit.beginTime).getDate() === number + 1 &&
+              new Date(visit.beginTime).getMonth() === activeDate.getMonth() &&
+              new Date(visit.beginTime).getFullYear() ===
+                activeDate.getFullYear()
+          )
+          .sort((a, b) =>
+            new Date(a.beginTime) > new Date(b.beginTime) ? 1 : -1
+          )}
         setShouldReload={setShouldReload}
       />
     ));
@@ -126,9 +132,11 @@ export function Calendar() {
         }}
       >
         {localStorage.getItem("type") === "owner" ? (
-          <Link style={{position: "absolute", marginRight: 1530, marginLeft: 500 }} to={"/pet"}>
-            <Button
-             style={{ justifyContent: "center", width: 350}}>
+          <Link
+            style={{ position: "absolute", marginRight: 1530, marginLeft: 500 }}
+            to={"/pet"}
+          >
+            <Button style={{ justifyContent: "center", width: 350 }}>
               {pet !== undefined
                 ? "Umawiasz wizytę dla: " + pet.name + " " + pet.species
                 : null}

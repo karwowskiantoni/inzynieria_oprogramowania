@@ -59,15 +59,15 @@ export function Visit({ visit, setShouldReload }) {
           {visit.petName} {visit.petSpecies}
         </Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
-          {new Date(visit.beginTime).getHours()}.
+          {new Date(visit.beginTime).getHours() + 2}.
           {new Date(visit.beginTime).getMinutes().toString().length < 2
-            ? "0" + new Date(visit.beginTime).getMinutes().toString()
-            : new Date(visit.beginTime).getMinutes().toString()}
+            ? "0" + new Date(visit.beginTime).getMinutes()
+            : new Date(visit.beginTime).getMinutes()}
           {" - "}
-          {new Date(visit.endTime).getHours().toString()}.
+          {new Date(visit.endTime).getHours() + 2}.
           {new Date(visit.endTime).getMinutes().toString().length < 2
-            ? "0" + new Date(visit.endTime).getMinutes().toString()
-            : new Date(visit.endTime).getMinutes().toString()}
+            ? "0" + new Date(visit.endTime).getMinutes()
+            : new Date(visit.endTime).getMinutes()}
         </Card.Subtitle>
         <Card.Text>
           {visit.vetFirstName} {visit.vetSurname}
