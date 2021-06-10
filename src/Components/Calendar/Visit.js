@@ -50,6 +50,7 @@ export function Visit({ visit, setShouldReload }) {
               ).then((response) => setShouldReload(Math.random()))
             }
             style={{ position: "absolute", marginTop: 50, marginLeft: 140 }}
+            variant={"danger"}
           >
             anuluj
           </Button>
@@ -59,9 +60,14 @@ export function Visit({ visit, setShouldReload }) {
         </Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
           {new Date(visit.beginTime).getHours()}.
-          {new Date(visit.beginTime).getMinutes()} -{" "}
-          {new Date(visit.endTime).getHours()}.
-          {new Date(visit.endTime).getMinutes()}
+          {new Date(visit.beginTime).getMinutes().toString().length < 2
+            ? "0" + new Date(visit.beginTime).getMinutes().toString()
+            : new Date(visit.beginTime).getMinutes().toString()}
+          {" - "}
+          {new Date(visit.endTime).getHours().toString()}.
+          {new Date(visit.endTime).getMinutes().toString().length < 2
+            ? "0" + new Date(visit.endTime).getMinutes().toString()
+            : new Date(visit.endTime).getMinutes().toString()}
         </Card.Subtitle>
         <Card.Text>
           {visit.vetFirstName} {visit.vetSurname}

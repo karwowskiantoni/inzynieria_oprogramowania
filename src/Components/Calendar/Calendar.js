@@ -19,17 +19,12 @@ export function Calendar() {
         );
       } else {
         response = await sendRequestWithToken("visits");
+        // response = await sendRequestWithToken(
+        //   `owners/${localStorage.getItem("id")}/visits`
+        // );
       }
       let json = await response.json();
       setVisits(json);
-
-      response = await sendRequestWithToken(
-        `owners/${localStorage.getItem("id")}/pets/${localStorage.getItem(
-          "petId"
-        )}`
-      );
-      json = await response.json();
-      setPet(json);
     }
 
     init();
