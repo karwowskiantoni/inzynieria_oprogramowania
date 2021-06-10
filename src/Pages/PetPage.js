@@ -109,7 +109,7 @@ export function PetPage() {
               Dodaj
             </Button>
           </Form>
-          <h1 > Edytuj dane zwierzaka</h1>
+          <h1 style={{paddingTop: 30}}> Edytuj dane zwierzaka</h1>
           <Form>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Imię zwierzaka</Form.Label>
